@@ -3,11 +3,11 @@ import { openDB } from 'idb';
 const initdb = async () =>
   openDB('jateDb', 1, {
     upgrade(db) {
-      if (db.objectStoreNames.contains('jateDb')) {
+      if (db.objectStoreNames.contains('text')) {
         console.log('jate database already exists');
         return;
       }
-      db.createObjectStore('jateDb', { keyPath: 'id', autoIncrement: true });
+      db.createObjectStore('text', { keyPath: 'id', autoIncrement: true });
       console.log('jate database created');
     },
   });
@@ -20,10 +20,10 @@ export const putDb = async (content) => {
   const textDb = await openDB('jateDb', 1);
 
   // Create a new transaction and specify the database and data privileges.
-  const tx = textDb.transaction('jateDb', 'readwrite');
+  const tx = textDb.transaction('text', 'readwrite');
 
   // Open up the desired object store.
-  const store = tx.objectStore('jateDb');
+  const store = tx.objectStore('text');
 
   // Use the .put() method on the store and pass in the content.
   const request = store.put({ id: 1, value: content });
@@ -40,10 +40,10 @@ export const getDb = async () => {
     const textDb = await openDB('jateDb', 1);
 
     // Create a new transaction and specify the database and data privileges.
-    const tx = textDb.transaction('jateDb', 'readonly');
+    const tx = textDb.transaction('text', 'readonly');
 
     // Open up the desired object store.
-    const store = tx.objectStore('jateDb');
+    const store = tx.objectStore('text');
 
     // Use the .get() method to get data in the database.
     const request = store.get(1);

@@ -3,7 +3,7 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
-const isProd = process.env.NODE_ENV === 'production';
+const isProd = process.env.NODE_ENV.trim() === 'production';
 console.log(isProd)
 // TODO: Add and configure workbox plugins for a service worker and manifest file.
 // TODO: Add CSS loaders and babel to webpack.
